@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('/layouts/landing');
+})->name('landing');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+
+Route::get('/dashboard', function () {
+    return view('dashboard/dash_admin/admin_dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
+//Route::get('/admin', function () {
+//    return view('dashboard/dash_admin/admin_dashboard');
+//})->middleware(['auth','role:admin'])->name('admin.index');
+
+//Route::middleware(['auth', 'role:admin'])->group(function () {
+//   Route::get('/dashboard', 'AdminController@index')->name('dashboard.admin');
+//});
+
+//Route::middleware(['auth', 'role:teacher'])->group(function () {
+//    Route::get('/dashboard', 'TeacherController@index')->name('dashboard');
+//});
